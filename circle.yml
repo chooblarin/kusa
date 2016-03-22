@@ -1,0 +1,20 @@
+machine:
+  java:
+    version: oraclejdk8
+
+  environment:
+    JAVA_OPTS: "-Xmx1024m -XX:MaxPermSize=512m"
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter tools
+    - echo y | android update sdk --no-ui --all --filter android-23
+    - echo y | android update sdk --no-ui --all --filter build-tools-23.0.2
+  cache_directories:
+    - ~/.android
+  override:
+    - ./gradlew dependencies
+
+test:
+  override:
+    - ./gradlew clean test
