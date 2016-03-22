@@ -85,6 +85,7 @@ captures/
 # .idea/dynamic.xml
 # .idea/uiDesigner.xml
 .idea/misc.xml
+.idea/modules.xml
 
 # Gradle:
 # .idea/gradle.xml
