@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_cell_size">12dp</dimen>
+    <dimen name="default_cell_space">2dp</dimen>
+    <dimen name="default_months_label_height">16dp</dimen>
+    <dimen name="default_text_size">8sp</dimen>
+</resources>
