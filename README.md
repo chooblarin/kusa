@@ -1,4 +1,4 @@
-# Kusa [![](https://jitpack.io/v/chooblarin/Kusa.svg)](https://jitpack.io/#chooblarin/Kusa)
+# Kusa [![](https://jitpack.io/v/chooblarin/kusa.svg)](https://jitpack.io/#chooblarin/kusa)
 
 View library to draw the 草 chart (know as calendar heat map).
 
@@ -13,27 +13,27 @@ Add a `KusaView` to your view hierarchy. You should specify the height of it.
     android:layout_height="120dp" />
 ```
 
-Look at the [sample](https://github.com/chooblarin/Kusa/blob/master/sample/src/main/java/com/chooblarin/kusa/demo/MainActivity.java)
+Look at the [sample](https://github.com/chooblarin/kusa/blob/master/sample/src/main/java/com/chooblarin/kusa/demo/MainActivity.java)
 
 # Install
 
-This can be found on JitPack: https://jitpack.io/#chooblarin/Kusa
+This can be found on JitPack: https://jitpack.io/#chooblarin/kusa
 
 Add it in your root build.gradle at the end of repositories:
 ```
 allprojects {
-		repositories {
-			...
-			maven { url "https://jitpack.io" }
-		}
-	}
+    repositories {
+      ...
+      maven { url "https://jitpack.io" }
+    }
+}
 ```
 
 Add the dependency
 ```
 dependencies {
-	        compile 'com.github.chooblarin:Kusa:0.0.1'
-	}
+    compile 'com.github.chooblarin:kusa:0.0.1'
+}
 ```
 
 # License
