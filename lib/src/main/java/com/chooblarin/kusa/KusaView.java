@@ -13,6 +13,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class KusaView extends View {
@@ -23,6 +24,7 @@ public class KusaView extends View {
             = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     private static String[] DAY_OF_WEEKS = {"S", "M", "T", "W", "T", "F", "S"};
 
+    final Date now;
     final int year;
     final int month;
     final int day;
@@ -43,6 +45,7 @@ public class KusaView extends View {
     private List<ChartData> chartDataList = new ArrayList<>();
 
     // Options
+    private boolean monthsLabelVisibility = true;
     private boolean dayOfWeekLabelVisibility = true;
 
     @ColorInt
@@ -60,6 +63,7 @@ public class KusaView extends View {
         super(context, attrs, defStyleAttr);
 
         Calendar calendar = Calendar.getInstance();
+        now = calendar.getTime();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -87,27 +91,32 @@ public class KusaView extends View {
         height = h;
         cellSize = (h - monthsLabelHeight) / 7 - space;
         cellHorizontalCount = w / (cellSize + space);
-        // final int surplus = width - cellHorizontalCount * (cellSize + space);
+        surplus = width - cellHorizontalCount * (cellSize + space);
     }
+
+    int surplus;
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        for (int i = 0; i < cellHorizontalCount - 1; i++) {
-            float l = width - (i + 1) * (cellSize + space);
-            float r = l + cellSize;
+        if (monthsLabelVisibility) {
+            drawMonthsLabel(canvas);
         }
 
         if (dayOfWeekLabelVisibility) {
             drawDayOfWeeksLabel(canvas);
         }
 
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < cellHorizontalCount - 1; j++) {
-                rect.left = width - (j + 1) * (cellSize + space);
+        for (int i = 0; i < cellHorizontalCount - 1; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (i == 0 && dayOfWeek - 1 < j) {
+                    continue;
+                }
+
+                rect.left = width - (i + 1) * (cellSize + space);
                 rect.right = rect.left + cellSize;
-                rect.top = monthsLabelHeight + i * (cellSize + space);
+                rect.top = monthsLabelHeight + j * (cellSize + space);
                 rect.bottom = rect.top + cellSize;
                 paint.setColor(color);
                 canvas.drawRect(rect, paint);
@@ -117,6 +126,27 @@ public class KusaView extends View {
 
     public void setChartDataList(List<ChartData> chartDataList) {
         this.chartDataList = chartDataList;
+    }
+
+    private void drawMonthsLabel(Canvas canvas) {
+        Calendar cal = Calendar.getInstance();
+        final int total = (cellHorizontalCount - 1) * 7;
+
+        int prevMonth = -1;
+        for (int i = 0; i < cellHorizontalCount - 1; i++) {
+            for (int j = 0; j < 7; j++) {
+                cal.setTime(now);
+                int daysAgo = total - (i * 7 + (j + 1));
+                cal.add(Calendar.DAY_OF_MONTH, -daysAgo);
+                int month = cal.get(Calendar.MONTH);
+                if (month != prevMonth) {
+                    String monthLabel = MONTHS[month];
+                    int x = surplus + (1 + (i + 1)) * (cellSize + space);
+                    canvas.drawText(monthLabel, x, cellSize, textPaint);
+                }
+                prevMonth = month;
+            }
+        }
     }
 
     private void drawDayOfWeeksLabel(Canvas canvas) {
