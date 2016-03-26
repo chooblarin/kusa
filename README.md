@@ -2,6 +2,10 @@
 
 View library to draw the 草 chart (know as calendar heat map).
 
+<p align="center">
+  <img src="assets/screenshot.png">
+</p>
+
 # Usage
 
 Add a `KusaView` to your view hierarchy. You should specify the height of it.
