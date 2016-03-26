@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="kusa_001">#D6E685</color>
+    <color name="kusa_002">#8CC665</color>
+    <color name="kusa_003">#44A340</color>
+    <color name="kusa_004">#1E6823</color>
 </resources>

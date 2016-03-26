@@ -1,8 +1,9 @@
 package com.chooblarin.kusa.demo;
 
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chooblarin.kusa.ChartData;
@@ -19,8 +20,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         List<ChartData> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            ChartData data = new ChartData(i, Color.BLUE);
+
+        final int[] colorResArray
+                = {R.color.kusa_001, R.color.kusa_002, R.color.kusa_003, R.color.kusa_004};
+
+        for (int i = 0; i < 100; i++) {
+            int colorIndex = (int) (Math.random() * 4);
+            int color = ContextCompat.getColor(this, colorResArray[colorIndex]);
+            ChartData data = new ChartData(i, color);
             list.add(data);
         }
 
