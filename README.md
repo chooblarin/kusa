@@ -36,7 +36,7 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-    compile 'com.github.chooblarin:kusa:0.0.1'
+    compile 'com.github.chooblarin:kusa:0.0.2'
 }
 ```
 
